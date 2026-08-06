@@ -18,7 +18,18 @@ item --gap ${os} Flavors
 goto ${live_version}
 
 :44
-goto flavor_select
+set repo http://server/fedora44-xfce
+kernel ${repo}/boot/x86_64/loader/linux \
+    ip=dhcp \
+    rd.neednet=1 \
+    rd.live.image \
+    root=live:${repo}/LiveOS/squashfs.img \
+    initrd=initrd
+initrd ${repo}/boot/x86_64/loader/initrd
+boot
+
+
+
 :43
 goto flavor_select
 :42
