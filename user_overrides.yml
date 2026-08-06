@@ -8,10 +8,10 @@ generate_local_vars: true
 make_num_jobs: 1
 
 # set desired site name
-# site_name: mysitename.com
+site_name: mysitename.com
 
 # set desired boot domain
-# boot_domain: boot.mysitename.com
+boot_domain: raw.githubusercontent.com/gyttyfgyfytttfc/netboot.xyz/refs/heads/development/boot/
 
 # set boot version
 # boot_version: "3.x"
