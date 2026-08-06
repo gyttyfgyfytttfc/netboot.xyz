@@ -1,0 +1,27 @@
+#!ipxe
+
+goto ${menu} ||
+
+:live_menu
+set os EndeavourOS
+menu ${os}
+set ipparam BOOTIF=${netX/mac} ip=dhcp net.ifnames=0
+item --gap ${os} Versions
+item Titan-Neo-2026.04.27 ${space} ${os} Titan-Neo-2026.04.27
+choose live_version || goto live_exit
+goto ${live_version}
+
+:Titan-Neo-2026.04.27
+set url ${live_endpoint}/asset-mirror/releases/download/Titan-Neo-2026.04.27-accd7e0f/
+goto boot
+
+
+:boot
+imgfree
+kernel ${url}vmlinuz ${ipparam} archiso_http_srv=${url} archisobasedir=arch cow_spacesize=10G earlymodules=loop modules-load=loop rd.modules-load=loop nvidia nouveau.modeset=0 nouveau.blacklist=yes modprobe.blacklist=nouveau i915.modeset=1 radeon.modeset=1 initrd=initrd.magic ${cmdline}
+initrd ${url}initrd
+boot
+
+:live_exit
+clear menu
+exit 0
