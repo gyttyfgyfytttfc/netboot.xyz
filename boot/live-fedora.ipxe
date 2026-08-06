@@ -18,7 +18,15 @@ item --gap ${os} Flavors
 goto ${live_version}
 
 :44
-goto flavor_select
+set base https://download.example.org/fedora/linux/releases/44/Spins/x86_64/iso
+set iso Fedora-Xfce-Live-x86_64-44-1.2.iso
+kernel ${base}/images/pxeboot/vmlinuz \
+    root=live:${base}/${iso} \
+    rd.live.image \
+    ro
+initrd ${base}/images/pxeboot/initrd.img
+boot
+
 :43
 goto flavor_select
 :42
