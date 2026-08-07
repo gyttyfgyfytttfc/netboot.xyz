@@ -11,7 +11,7 @@ set V6_ERR IPv6 appears to have failed... attempting IPv4...
 set HTTPS_ERR HTTPS appears to have failed... attempting HTTP
 set HTTP_ERR HTTP has failed, localbooting...
 set site_name netboot.xyz
-set boot_domain boot.netboot.xyz
+set boot_domain raw.githubusercontent.com/gyttyfgyfytttfc/netboot.xyz/refs/heads/development/boot/
 set ipxe_version ${version}
 set version 3.x
 set conn_type https
