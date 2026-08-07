@@ -1,6 +1,6 @@
 ---
-sigs_menu: false
-sigs_enabled: false
+sigs_menu: true
+sigs_enabled: true
 generate_disks_arm: true
 generate_disks_hybrid: true
 generate_disks_linux: true
