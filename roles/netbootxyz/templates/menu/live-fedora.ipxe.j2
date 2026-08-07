@@ -20,7 +20,15 @@ menu ${os} ${live_version}
 item --gap ${os} Flavors
 goto ${live_version}
 :44
-goto flavor_select
+set repo https://archive.org/download/fedora-workstation-live-44-1.7.x86_64_202608
+kernel ${repo}/linux \
+    ip=dhcp \
+    rd.neednet=1 \
+    rd.live.image \
+    root=live:${repo}/squashfs.img \
+    initrd=initrd
+initrd ${repo}/initrd
+boot
 :43
 goto flavor_select
 :42
