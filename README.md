@@ -112,8 +112,42 @@ The build output will be located in /var/www/html by default.
 #### Deploying with Docker
 
 ```
-docker build -t localbuild --platform=linux/amd64 -f Dockerfile .
-docker run --rm -it --platform=linux/amd64 -v $(pwd):/buildout localbuild
+cd
+rm -rf netboot.xyz
+git clone https://github.com/gyttyfgyfytttfc/netboot.xyz.git
+cd netboot.xyz
+podman system reset -f
+podman build -t localbuild --platform=linux/amd64 -f Dockerfile .
+podman run --rm -it --platform=linux/amd64 -v $(pwd):/buildout localbuild
+mkdir -p iso/isolinux
+cp buildout/ipxe/netboot.xyz.lkrn iso/
+cp /usr/share/syslinux/isolinux.bin iso/isolinux/
+cp /usr/share/syslinux/ldlinux.c32 iso/isolinux/
+
+nano iso/isolinux/isolinux.cfg
+
+
+
+
+DEFAULT netboot
+PROMPT 0
+TIMEOUT 10
+
+LABEL netboot
+    KERNEL /netboot.xyz.lkrn
+
+
+
+
+xorriso -as mkisofs \
+  -o netboot.xyz-custom.iso \
+  -b isolinux/isolinux.bin \
+  -c isolinux/boot.cat \
+  -no-emul-boot \
+  -boot-load-size 4 \
+  -boot-info-table \
+  iso/
+
 ```
 
 The build output will be in the generated folder `buildout`
