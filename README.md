@@ -119,30 +119,19 @@ cd netboot.xyz
 podman system reset -f
 podman build -t localbuild --platform=linux/amd64 -f Dockerfile .
 podman run --rm -it --platform=linux/amd64 -v $(pwd):/buildout localbuild
-mkdir -p iso/isolinux
+mkdir -p iso/
+wget https://boot.netboot.xyz/ipxe/netboot.xyz.iso -O netboot.xyz.iso
+sudo mount netboot.xyz.iso /mnt
+cp -R /mnt/* iso/
+sudo umount -lf /mnt
+rm -rf iso/netboot.xyz.lkrn iso/autoexec.ipxe
 cp buildout/ipxe/netboot.xyz.lkrn iso/
-cp /usr/share/syslinux/isolinux.bin iso/isolinux/
-cp /usr/share/syslinux/ldlinux.c32 iso/isolinux/
-
-nano iso/isolinux/isolinux.cfg
-
-
-
-
-DEFAULT netboot
-PROMPT 0
-TIMEOUT 10
-
-LABEL netboot
-    KERNEL /netboot.xyz.lkrn
-
-
-
-
+cp boot/autoexec.ipxe iso
+rm -f netboot.xyz.iso
 xorriso -as mkisofs \
-  -o netboot.xyz-custom.iso \
-  -b isolinux/isolinux.bin \
-  -c isolinux/boot.cat \
+  -o netboot.xyz.iso \
+  -b isolinux.bin \
+  -c boot.catalog \
   -no-emul-boot \
   -boot-load-size 4 \
   -boot-info-table \
