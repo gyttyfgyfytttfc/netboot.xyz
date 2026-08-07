@@ -12,29 +12,31 @@ item --gap ${os} Versions
 item 44 ${space} ${os} 44
 item 43 ${space} ${os} 43
 item 42 ${space} ${os} 42
+item 41 ${space} ${os} 41
+item 40 ${space} ${os} 40
+
 choose live_version || goto live_exit
 menu ${os} ${live_version}
 item --gap ${os} Flavors
 goto ${live_version}
-
 :44
-set repo http://server/fedora44-xfce
-kernel ${repo}/boot/x86_64/loader/linux \
-    ip=dhcp \
-    rd.neednet=1 \
-    rd.live.image \
-    root=live:${repo}/LiveOS/squashfs.img \
-    initrd=initrd
-initrd ${repo}/boot/x86_64/loader/initrd
-boot
-
-
-
+goto flavor_select
 :43
 goto flavor_select
 :42
 goto flavor_select
-
+:41
+goto flavor_select
+:40
+set repo https://github.com/gyttyfgyfytttfc/netboot.xyz/releases/download/Fedora-Workstation-Live-x86_64-40-1.14/
+kernel ${repo}/vmlinuz \
+    ip=dhcp \
+    rd.neednet=1 \
+    rd.live.image \
+    root=live:${repo}/squashfs.img \
+    initrd=initrd
+initrd ${repo}/initrd.img
+boot
 :flavor_select
 choose flavor || goto live_menu
 echo ${cls}
