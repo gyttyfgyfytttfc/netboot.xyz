@@ -20,7 +20,15 @@ menu ${os} ${live_version}
 item --gap ${os} Flavors
 goto ${live_version}
 :44
-goto flavor_select
+set repo https://archive.org/download/fedora-workstation-live-44-1.7.x86_64_202608/
+set pxeboot https://mirror.imt-systems.com/fedora/linux/releases/44/Server/x86_64/os/images/pxeboot/
+kernel ${pxeboot}/vmlinuz \
+    ip=dhcp \
+    rd.neednet=1 \
+    rd.live.image \
+    root=live:${repo}/squashfs.img
+initrd ${pxeboot}/initrd.img
+boot
 :43
 goto flavor_select
 :42
