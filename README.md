@@ -114,7 +114,7 @@ The build output will be located in /var/www/html by default.
 ```
 cd
 rm -rf netboot.xyz
-git clone https://github.com/gyttyfgyfytttfc/netboot.xyz.git
+git clone -b stable https://github.com/gyttyfgyfytttfc/netboot.xyz.git
 cd netboot.xyz
 podman system reset -f
 podman build -t localbuild --platform=linux/amd64 -f Dockerfile .
