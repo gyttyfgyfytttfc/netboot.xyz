@@ -1,4 +1,4 @@
-boot_domain: raw.githubusercontent.com/gyttyfgyfytttfc/netboot.xyz/refs/heads/development/boot/
+boot_domain: boot.netboot.xyz
 boot_timeout: 300000
 boot_version: 3.x
 bootloader_disks:
